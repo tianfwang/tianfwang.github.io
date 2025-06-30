@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Single-Step Latent Diffusion for Underwater Image Restoration">
+  <meta name="keywords" content="Underwater Image Restoration, Latent Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Supplement for: Single-Step Latent Diffusion for Underwater Image Restoration</title>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Video Supplement for: Single-Step Latent Diffusion for Underwater Image Restoration</h1>
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous ICCP 2025 Submission
+            </span>
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results of our Underwater Image Restoration Method on Underwater Video Sequences
+        </h2>
+        <div class="content has-text-justified">
+          <p>
+            Our SLURPP underwater restoration method demonstrates effective performance on clear image and medium predictions in using a single image as input.
+            Our method is not designed for video underwater restoration, and we do not model the temporal consistency of between underwater video frames.
+            Nonetheless, we test our method on the MVK underwater dataset, which contains a diverse set of underwater videos under different aquatic conditions.
+          </p>
+          <p>
+            While reasonable view consistency and good restoration quality is observed in the foreground objects,
+            in deep-sea environments flickering can occur in background regions. 
+            We note that on a single image basis, the restoration quality is good across depth ranges with no apparent artifacts.
+            We believe the flickering stem from our model not modeling the temporal consistency of between underwater video frames.
+            Enhancing the model's temporal consistency for video applications remains a key direction for future research.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Coral Scenes with Large Depth Variation</h2>
+        <div class="content has-text-justified">
+          Here we show the results of our method on two scenes consisting of coral reefs with large depth variation.
+          When the camera is facing the foreground objects, our method can produce view-consistent predictions of the coral reefs and fishes with good quality.
+          However, when the depth range of the scene is large, or when the camera quickly changes perspective, our method can produce flickering predictions between frames.
+          We suspect this is because the our image-based restoration method is not designed to model the temporal consistency of between underwater video frames.
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper video. -->
+    <div class="publication-video">
+      <video controls autoplay muted loop playsinline>
+        <source src="videos/coral.mp4" type="video/mp4">
+        Your browser does not support the video tag. Please open the video videos/coral.mp4 provided in the supplementary material.
+      </video>
+    </div>
+
+        <!-- Paper video. -->
+        <div class="publication-video">
+          <video controls autoplay muted loop playsinline>
+            <source src="videos/coral2.mp4" type="video/mp4">
+            Your browser does not support the video tag. Please open the video videos/coral2.mp4 provided in the supplementary material.
+          </video>
+        </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Scenes with small depth variation</h2>
+        <div class="content has-text-justified">
+          <p>
+            We show the results of our method on a sea bed scene with small depth variation as well as a scene in shallow water.
+            Our method can produce view-consistent predictions of the sea snake, fish, and reefs in the videos, as well as the background seabed with good quality.
+            Even with the movement of the sea snake, our method can produce consistent color restoration of  its body.
+            We note that we do observe flickering in the backscattering and transmission predictions.
+            However, we do not see much flickering in the clear image predictions.
+            We hypothesize that the reason for this is the lighting condition of the scenes also flickers between frames, 
+            due to the complicated underwater environment, and external lighitng, such as the flash in the second fish video.
+
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper video. -->
+    <div class="publication-video">
+      <video controls autoplay muted loop playsinline>
+        <source src="videos/snake.mp4" type="video/mp4">
+        Your browser does not support the video tag. Please open the video videos/snake.mp4 provided in the supplementary material.
+      </video>
+    </div>
+  
+    <div class="publication-video">
+      <video controls autoplay muted loop playsinline>
+        <source src="videos/fish2.mp4" type="video/mp4">
+        Your browser does not support the video tag. Please open the video videos/fish2.mp4 provided in the supplementary material.
+      </video>
+    </div>
+
+    <div class="publication-video">
+      <video controls autoplay muted loop playsinline>
+        <source src="videos/shallow.mp4" type="video/mp4">
+          Your browser does not support the video tag. Please open the video videos/shallow.mp4 provided in the supplementary material.
+      </video>
+    </div>
+
+
+
+
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Deep Sea Videos</h2>
+        <div class="content has-text-justified">
+          <p>
+            We show the results of our method on a deep sea video.
+            Our method can produce view-consistent predictions of the fish in the foreground.
+            However, we do observe some flickering in the low light background, as well as in the backscattering and transmission predictions.
+            Interestingly, at the start of the video, the fish and reefs are not in foucs, and our transmission and backscattering predictions are also blurry.
+            Once the fish and reefs are in focus, we see clear structues of the reefs and fish in the transmission and backscattering predictions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper video. -->
+    <div class="publication-video">
+      <video controls autoplay muted loop playsinline>
+        <source src="videos/fish.mp4" type="video/mp4">
+        Your browser does not support the video tag. Please open the video videos/fish.mp4 provided in the supplementary material.
+      </video>
+    </div>
+
+
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Failure Case</h2>
+        <div class="content has-text-justified">
+          <p>
+            We show the results of our method on a wreck scene.
+            Our method can produce view-consistent predictions of the wreck in the video.
+            However, we do observe strong flickering in all predictions, once the background is in view of the camera.
+            We suspect that this effect is a combination of the lack of temporaral modeling  of our method, 
+            the floating dirt in the background negatively affectting implicit depth prior of the water medium prediction,
+            and the low light and noisy capture conditions of the video.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper video. -->
+    <div class="publication-video">
+      <video controls autoplay muted loop playsinline>
+        <source src="videos/wreck.mp4" type="video/mp4">
+          Your browser does not support the video tag. Please open the video videos/wreck.mp4 provided in the supplementary material.
+      </video>
+    </div>
+
+
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page uses template from Nerfies. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

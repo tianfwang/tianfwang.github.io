@@ -69,8 +69,7 @@
             <span class="author-block">* Equal contribution</span>
           </div>
 
-
-                    <div class="column has-text-centered">
+          <div class="column has-text-centered"></div>
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
@@ -112,12 +111,48 @@
                   </a> -->
             </div>
 
-          </div>
-        </div>
+            <!-- Added margin-bottom for vertical spacing -->
+            <div style="margin-bottom: 2rem;"></div>
+
+            <div class="columns is-centered" style="justify-content: center;">
+                <img src="./static/images/teaser.png" class="center" alt="Interpolate start reference image." style='height: 100%; width: 100%; object-fit: contain; text-align: center; margin: auto;'/>
+              </div>
+              <div class="content has-text-justified">
+                <center>
+                  Our single-step latent diffusion pipeline can robustly restore underwater images and predict water medium parameters in a variety of different scenes and water conditions. 
+                </center>
+              </div>
+            </div>
       </div>
     </div>
   </div>
 </section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract
+        </h2>
+        <div class="content has-text-justified">
+          Underwater image restoration algorithms seek to restore the color, contrast, and appearance of a scene that is imaged underwater. 
+          They are a critical tool in applications ranging from marine ecology and aquaculture to underwater construction and archaeology. 
+          While existing pixel-domain diffusion-based image restoration approaches are effective at restoring simple scenes with limited depth variation, they are computationally intensive and often generate unrealistic artifacts when applied to scenes with complex geometry and significant depth variation. 
+          In this work we overcome these limitations by combining a novel network architecture (SLURPP) with an accurate synthetic data generation pipeline. 
+          SLURPP combines pretrained latent diffusion models---which encode strong priors on the geometry and depth of scenes---with an explicit scene decomposition---which allows one to model and account for the effects of light attenuation and backscattering. 
+          To train SLURPP we design a physics-based underwater image synthesis pipeline that applies varied and realistic underwater degradation effects to existing terrestrial image datasets. %s using previously captured optical measurements. 
+          This approach enables the generation of diverse training data with dense medium/degradation annotations. 
+          We evaluate our method extensively on both synthetic and real-world benchmarks and demonstrate state-of-the-art performance. Notably, SLURPP is over 200X faster than existing diffusion-based methods while offering  ~ 3 dB improvement in PSNR on synthetic benchmarks. It also offers compelling qualitative improvements on real-world data. 
+        </div>
+      </div>
+    </div>
+
+
+</section>
+
+
 
 <footer class="footer">
   <div class="container">
@@ -145,3 +180,62 @@
 
 </body>
 </html>
+
+
+
+<style>
+	.collapsible {
+		background-color: #eee;
+		color: #444;
+		cursor: pointer;
+		padding: 18px;
+		width: 100%;
+		border: none;
+		text-align: left;
+		outline: none;
+		font-size: 15px;
+	}
+	.active,
+	.collapsible:hover {
+		background-color: #ccc;
+	}
+	.collapsible:after {
+		content: "\02795"; /* + */
+		font-size: 13px;
+		float: right;
+		margin-left: 5px;
+	}
+	.active:after {
+		content: "\2796"; /* - */
+	}
+	#toc {
+		padding: 0 18px;
+		display: none;
+		background-color: #f1f1f1;
+	}
+</style>
+<div style="position: fixed; top: 20px; left: 20px">
+	<button id="show-toc" type="button" class="collapsible">Quick Links</button>
+	<ul id="toc"></ul>
+</div>
+<script type="text/javascript">
+	const h2s = document.getElementsByTagName("h2");
+	[...h2s].forEach((elm) => {
+		const item = document.createElement("li");
+		const anchor = document.createElement("a");
+		if (!elm.id) elm.id = elm.innerText;
+		anchor.href = `#${elm.id}`;
+		anchor.innerText = elm.innerText;
+		item.appendChild(anchor);
+		toc.appendChild(item);
+	});
+	document.getElementById("show-toc").addEventListener("click", function () {
+		this.classList.toggle("active");
+		const content = this.nextElementSibling;
+		if (content.style.display === "block") {
+			content.style.display = "none";
+		} else {
+			content.style.display = "block";
+		}
+	});
+</script>
