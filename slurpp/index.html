@@ -20,16 +20,31 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="icon" href="./static/images/favicon.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <!-- TwentyTwenty CSS -->
+  <link rel="stylesheet" href="static/css/twentytwenty.css" type="text/css" media="screen" />
+
+  <!-- jQuery (necessary for TwentyTwenty plugin) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+  <!-- Styles for the page and TwentyTwenty plugin -->
+  <style>
+      .twentytwenty-container img { width: 100%; }
+  </style>
+
+  <!-- Dependencies -->
+  <script src="static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+  <script src="static/js/jquery.event.move.js" type="text/javascript"></script>
+  <!-- TwentyTwenty JS -->
+  <script src="static/js/jquery.twentytwenty.js" type="text/javascript"></script>
 </head>
 <body>
-
 
 
 <section class="hero">
@@ -111,20 +126,393 @@
                   </a> -->
             </div>
 
-            <!-- Added margin-bottom for vertical spacing -->
-            <div style="margin-bottom: 2rem;"></div>
-
-            <div class="columns is-centered" style="justify-content: center;">
-                <img src="./static/images/teaser.png" class="center" alt="Interpolate start reference image." style='height: 100%; width: 100%; object-fit: contain; text-align: center; margin: auto;'/>
-              </div>
-              <div class="content has-text-justified">
-                <center>
-                  Our single-step latent diffusion pipeline can robustly restore underwater images and predict water medium parameters in a variety of different scenes and water conditions. 
-                </center>
-              </div>
-            </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+        <div class="container">
+                <div class="content has-text-justified" style="max-width: 80%; margin: 10px auto;">
+        <center>
+          Given an input <b>underwater image (top row)</b>, our single-step latent diffusion method <b>SLURPP</b> jointly predicts the <b>clear image (middle row)</b>, and the per-pixel underwater medium parameters, specifically the <b>backscattering (bottom row left)</b> and <b>transmission (bottom row right)</b> parameters.
+        </center>
+                </div>
+    </div>
+  <div class="hero-body">
+
+    
+    <div class="container">
+      <div style="max-width: 80%; margin: 0 auto;">
+        <div id="results-carousel-horizontal" class="carousel results-carousel">
+          <div class="item">
+            <img src="static/images/gallery/00.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/01.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/02.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/03.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/04.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/05.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/06.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/07.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/08.png" alt="Gallery image" style="height:auto;">
+          </div>
+          <div class="item">
+            <img src="static/images/gallery/09.png" alt="Gallery image" style="height:auto;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview
+        </h2>
+        <div class="content has-text-justified">
+        Underwater image restoration aims to recover color, contrast, and appearance in underwater scenes, crucial for fields like marine ecology and archaeology. While pixel-domain diffusion methods work for simple scenes, they are computationally heavy and produce artifacts in complex, depth-varying scenes.
+          We present a single-step latent diffusion method, <b>SLURPP</b> (<b>S</b>ingle-step <b>L</b>atent <b>U</b>nderwater <b>R</b>estoration with <b>P</b>retrained <b>P</b>riors), that overcomes these limitations by combining a novel network architecture with an accurate synthetic data generation pipeline.
+          SLURPP combines pretrained latent diffusion models—which encode strong priors on the geometry and depth of scenes—with an explicit scene decomposition—which allows one to model and account for the effects of light attenuation and backscattering.
+          To train SLURPP we design a physics-based underwater image synthesis pipeline that applies varied and realistic underwater degradation effects to existing terrestrial image datasets.
+          We evaluate our method extensively on both synthetic and real-world benchmarks and demonstrate state-of-the-art performance. 
+        </div>
+      </div>
+    </div>
+
+
+</section>
+
+
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-three-quarters has-text-centered">
+                    <h1 class="title is-3">Comparing Restoration Results Between Methods</h1>
+
+                    <div class="row ">       
+                        <!-- scenes small images - with click option -->
+                        <div class="column-viewer">
+                            <button class="button-syn" onclick="change_scene_real(1);">
+                                <h1 class="is-text is-size-6 has-text-weight-semibold">scene#1</h1>
+                                <input type="image" src="static/images/comp/scene1/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(2);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#2</h1>
+                                <input type="image" src="static/images/comp/scene2/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(3);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#3</h1>
+                                <input type="image" src="static/images/comp/scene3/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(4);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#4</h1>
+                                <input type="image" src="static/images/comp/scene4/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(5);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#5</h1>
+                                <input type="image" src="static/images/comp/scene5/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(6);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#6</h1>
+                                <input type="image" src="static/images/comp/scene6/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(7);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#7</h1>
+                                <input type="image" src="static/images/comp/scene7/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(8);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#8</h1>
+                                <input type="image" src="static/images/comp/scene8/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+                            <button class="button-syn" onclick="change_scene_real(9);">
+                                <h1 class="is-text is-size-6  has-text-weight-semibold">scene#9</h1>
+                                <input type="image" src="static/images/comp/scene9/Input.png"
+                                       style="border: double; border-radius: inherit" height="90"/>
+                            </button>
+
+
+                            <script>
+                              
+                                var current_scene_id = 1;
+                                var image_sources = {
+                                    'Input': 'Input.png',
+                                    'SLURPP (Ours)': 'SLURPP.png',
+                                    'Waternet': 'Waternet.png',
+                                    'FUnIE-GAN': 'FUnIEGAN.png',
+                                    'USUIR': 'USUIR.png',
+                                    'Semi-UIR': 'SEMIUIR.png',
+                                    'DeepWaveNet': 'DeepWaveNet.png',
+                                    'Histroformer': 'Histroformer.png',
+                                    'Osmosis': 'Osmosis.png',
+                                    'Phaseformer': 'Phaseformer.png'
+                                };
+
+                                function update_slider_images() {
+                                    var left_select = document.getElementById('left-image-select');
+                                    var right_select = document.getElementById('right-image-select');
+                                    var left_image_key = left_select.value;
+                                    var right_image_key = right_select.value;
+
+                                    var left_img_src = "static/images/comp/scene" + current_scene_id + "/" + image_sources[left_image_key];
+                                    var right_img_src = "static/images/comp/scene" + current_scene_id + "/" + image_sources[right_image_key];
+
+                                    var left_img = document.getElementById('rgb_static');
+                                    var right_img = document.getElementById('rgb_main');
+
+                                    left_img.src = left_img_src;
+                                    right_img.src = right_img_src;
+
+                                    // Update TwentyTwenty labels
+                                    var left_label = left_select.options[left_select.selectedIndex].text;
+                                    var right_label = right_select.options[right_select.selectedIndex].text;
+                                    
+                                    var twentytwenty_container = $(".twentytwenty-container");
+                                    twentytwenty_container.find('.twentytwenty-before-label').attr('data-content', left_label);
+                                    twentytwenty_container.find('.twentytwenty-after-label').attr('data-content', right_label);
+                                }
+
+                                function change_scene_real(id) {
+                                    current_scene_id = id;
+                                    update_slider_images();
+
+                                    // Update thumbnails
+                                    var thumbnail_container = document.getElementById('thumbnail-container');
+                                    thumbnail_container.innerHTML = ''; // Clear existing thumbnails
+                                    Object.keys(image_sources).forEach(function(key) {
+                                        var thumb_div = document.createElement('div');
+                                        thumb_div.style = "padding: 5px; text-align: center;";
+                                        
+                                        var thumb_h1 = document.createElement('h1');
+                                        thumb_h1.className = "is-text is-size-6 has-text-weight-semibold";
+                                        thumb_h1.innerText = key;
+                                        
+                                        var thumb_img = document.createElement('img');
+                                        thumb_img.src = "static/images/comp/scene" + id + "/" + image_sources[key];
+                                        thumb_img.style = "max-width: 110px; height: auto;";
+                                        
+                                        thumb_div.appendChild(thumb_h1);
+                                        thumb_div.appendChild(thumb_img);
+                                        thumbnail_container.appendChild(thumb_div);
+                                    });
+                                }
+
+                                function populate_dropdowns() {
+                                    var left_select = document.getElementById('left-image-select');
+                                    var right_select = document.getElementById('right-image-select');
+                                    left_select.innerHTML = '';
+                                    right_select.innerHTML = '';
+
+                                    Object.keys(image_sources).forEach(function(key) {
+                                        var option = document.createElement('option');
+                                        option.value = key;
+                                        option.text = key;
+                                        left_select.appendChild(option.cloneNode(true));
+                                        right_select.appendChild(option);
+                                    });
+
+                                    right_select.value = 'SLURPP (Ours)';
+                                    left_select.value = 'Input';
+                                }
+
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    populate_dropdowns();
+                                    // Set initial images on load
+                                    change_scene_real(current_scene_id);
+                                });
+                            </script>
+                        </div>   
+                    </div>
+                    
+                    <style>
+                        /* Media query for narrow screens */
+                        @media only screen and (max-width: 600px) {
+                            .row {
+                            flex-direction: column; /* Reverse the order for narrow screens */
+                            }
+
+                            .column {
+                            width: 100%; /* Make each column take the full width */
+                            }
+                        }
+                    </style>
+
+                    <div class="columns is-centered" style="margin-top: 20px;">
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">Left Image</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="left-image-select" onchange="update_slider_images()">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">Right Image</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="right-image-select" onchange="update_slider_images()">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                        <div class="column">
+                                <div id="mainImage" class="twentytwenty-container" 
+                                style="max-width: 512px; height: auto; display: block;margin: 10px auto 10px auto;">
+                                    <img class='llff-viewer' id="rgb_static" src="static/images/comp/scene1/osmosis.png" alt="Before" 
+                                    style="border-style: none !important; max-width: 100%; height: auto;"/>
+                                    <img class='llff-viewer' id="rgb_main" src="static/images/comp/scene1/Input.png" alt="After"
+                                    style="border-style: none !important; max-width: 100%; height: auto;"/>
+                                </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div id="thumbnail-container" class="row" style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+                        <!-- Thumbnails will be generated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <!-- <div class="container"> -->
+
+    <h2 class="title is-3"><p><center> Comparing Water  Medium Prediction </center></p></h2>
+    <div class="columns is-centered" style="justify-content: center;">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <img src="./static/images/osmosis_comp.jpg" class="center" style='height: 100%; width: 100%; object-fit: contain; text-align: center; margin: auto;'/>
+    </div>
+    <div class="content has-text-justified">
+      <p> 
+      In this figure we show the predicted clear image and medium-related parameters for our method (backscattering) and Osmosis (depth). 
+      In the medium visualization of both methods, objects in the foreground have lower depth/backscattering, while background objects have higher depth/backscattering. 
+      Osmosis highly depends on accurate depth estimation, incorrect depth (such as the diver's face region in the right image) leads to unrealistic restoration with spurious color artifacts. 
+      Our scene-medium separation formulation leverages depth priors indirectly through water medium prediction, and we obtain much better quality predictions for both clear restoration and depth-dependent medium parameters.
+    </div>
+    <br>
+
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <!-- <div class="container"> -->
+
+    <h2 class="title is-3"><p><center> Proposed Method </center></p></h2>
+    <div class="columns is-centered" style="justify-content: center;">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <img src="./static/images/pipeline.png" class="center" style='height: 100%; width: 100%; object-fit: contain; text-align: center; margin: auto;'/>
+    </div>
+    <div class="content has-text-justified">
+      <p> 
+      We use a dual-branch latent diffusion network to jointly predict the clear image and water medium parameters in a single inference step.
+      </p> 
+      <p> 
+        The <b>Scene Branch</b> predicts the restored clear image is fine tuned from a text-to-image diffusion model. 
+        The cross-latent decoder is used to transfer fine details from the input image to the restored image through encoder skip connections to the decoder.
+      </p>
+      <p>
+       The <b>Medium Branch</b> predicts the water medium parameters, including the attenuation and backscattering coefficients.
+       Due to the strong correlation of medium effects with the scene depth, the medium branch is fine-tuned from a diffusion-based monocular depth model (Marigold).
+      </p>
+    </div>
+    <br>
+    <div class="columns is-centered" style="justify-content: center;">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <img src="./static/images/Data_Gen.jpg" class="center" style='height: 70%; width: 70%; object-fit: contain; text-align: center; margin: auto;'/>
+    </div>
+    <div class="content has-text-justified">
+
+    <p>
+      To train the model, we use a <b>physics-based underwater image synthesis pipeline</b> to generate realistic underwater images with diverse medium parameters.
+      We use a large and diverse set of terrestrial images as the base dataset, and apply realistic underwater degradation effects to generate synthetic underwater images.
+      We sample attenuation values based on real-world water measurements, and source diverse, realistic background light estimated from real-world underwater images.
+
+    </p>  
+    </div>
+    <br>
+    <div class="columns is-centered" style="justify-content: center;">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <img src="./static/images/training.png" class="center" style='height: 70%; width: 70%; object-fit: contain; text-align: center; margin: auto;'/>
+    </div>
+    <div class="content has-text-justified">
+
+    <p>
+      We train our model in two stages.
+      In our first stage, we train our dual-branch UNets with inter-branch cross-attention to directly predict the latent images of the clear scene, as well as medium transmission and backscattering. 
+      The latent outputs are decoded and supervised with their respective ground truths using image losses. 
+      We also use the reconstruction loss to guide the predicted outputs to respect the underwater image formation model. 
+      For stage 2 cross-latent decoding, we fine-tune the decoder and additional zero convolution skip connections to transfer high-frequency details from the input underwater image to the restored image.
+    </p>  
+    </div>
+
+
+
+  </h2>
+
   </div>
 </section>
 
@@ -134,25 +522,29 @@
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract
+        <h2 class="title is-3">Video Results
         </h2>
         <div class="content has-text-justified">
-          Underwater image restoration algorithms seek to restore the color, contrast, and appearance of a scene that is imaged underwater. 
-          They are a critical tool in applications ranging from marine ecology and aquaculture to underwater construction and archaeology. 
-          While existing pixel-domain diffusion-based image restoration approaches are effective at restoring simple scenes with limited depth variation, they are computationally intensive and often generate unrealistic artifacts when applied to scenes with complex geometry and significant depth variation. 
-          In this work we overcome these limitations by combining a novel network architecture (SLURPP) with an accurate synthetic data generation pipeline. 
-          SLURPP combines pretrained latent diffusion models---which encode strong priors on the geometry and depth of scenes---with an explicit scene decomposition---which allows one to model and account for the effects of light attenuation and backscattering. 
-          To train SLURPP we design a physics-based underwater image synthesis pipeline that applies varied and realistic underwater degradation effects to existing terrestrial image datasets. %s using previously captured optical measurements. 
-          This approach enables the generation of diverse training data with dense medium/degradation annotations. 
-          We evaluate our method extensively on both synthetic and real-world benchmarks and demonstrate state-of-the-art performance. Notably, SLURPP is over 200X faster than existing diffusion-based methods while offering  ~ 3 dB improvement in PSNR on synthetic benchmarks. It also offers compelling qualitative improvements on real-world data. 
+        We test our method on the MVK underwater dataset, which contains a diverse set of underwater videos under different aquatic conditions.
+
         </div>
+
       </div>
+
+      
     </div>
 
+    <div class="publication-video">
+        <video controls autoplay muted loop playsinline>
+          <source src="video/videos/coral2.mp4" type="video/mp4">
+          Your browser does not support the video tag. Please open the video videos/coral2.mp4 provided in the supplementary material.
+        </video>
+        <center><a href="./video/index.html">Please click here for more video results</a>.</center>
+    </div>
+
+  </div>
 
 </section>
-
-
 
 <footer class="footer">
   <div class="container">
@@ -169,8 +561,8 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            This website uses the template from <a
-              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. We thank the authors sharing their work.
+            This website uses elements from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and <a href="https://osmosis-diffusion.github.io/">Osmosis</a>. We thank the authors sharing their work.
           </p>
         </div>
       </div>
@@ -178,9 +570,27 @@
   </div>
 </footer>
 
+
 </body>
 </html>
 
+
+<script>
+    // document.onkeydown = keyHandler;
+    $(window).on('load', function() {
+        // Initialize TwentyTwenty plugin
+        $(".twentytwenty-container").twentytwenty({
+            default_offset_pct: 0.5,
+            orientation: 'horizontal',
+            before_label: 'SLURPP (Ours)',
+            after_label: 'Input',
+            no_overlay: false,
+            move_slider_on_hover: false,
+            move_with_handle_only: true,
+            click_to_move: false
+        });
+    });
+</script>
 
 
 <style>
@@ -214,28 +624,6 @@
 		background-color: #f1f1f1;
 	}
 </style>
-<div style="position: fixed; top: 20px; left: 20px">
-	<button id="show-toc" type="button" class="collapsible">Quick Links</button>
-	<ul id="toc"></ul>
-</div>
-<script type="text/javascript">
-	const h2s = document.getElementsByTagName("h2");
-	[...h2s].forEach((elm) => {
-		const item = document.createElement("li");
-		const anchor = document.createElement("a");
-		if (!elm.id) elm.id = elm.innerText;
-		anchor.href = `#${elm.id}`;
-		anchor.innerText = elm.innerText;
-		item.appendChild(anchor);
-		toc.appendChild(item);
-	});
-	document.getElementById("show-toc").addEventListener("click", function () {
-		this.classList.toggle("active");
-		const content = this.nextElementSibling;
-		if (content.style.display === "block") {
-			content.style.display = "none";
-		} else {
-			content.style.display = "block";
-		}
-	});
-</script>
+
+
+

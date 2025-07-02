@@ -1,6 +1,7 @@
+// const {bulmaSlider} = require("./bulma-slider");
 window.HELP_IMPROVE_VIDEOJS = false;
 
-var INTERP_BASE = "./static/interpolation/stacked";
+var INTERP_BASE = "https://storage.googleapis.com/nerfies-public/interpolation/stacked";
 var NUM_INTERP_FRAMES = 240;
 
 var interp_images = [];
@@ -20,7 +21,7 @@ function setInterpolationImage(i) {
 }
 
 
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Check for click events on the navbar burger icon
     $(".navbar-burger").click(function() {
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
@@ -31,11 +32,12 @@ $(document).ready(function() {
 
     var options = {
 			slidesToScroll: 1,
-			slidesToShow: 3,
+			slidesToShow: 5,
 			loop: true,
 			infinite: true,
-			autoplay: false,
-			autoplaySpeed: 3000,
+			autoplay: true,
+			pauseOnHover: true,
+			autoplaySpeed: 2000,
     }
 
 		// Initialize all div with carousel class
@@ -65,14 +67,28 @@ $(document).ready(function() {
         player.currentTime = player.duration / 100 * this.value;
       })
     }, false);*/
-    // preloadInterpolationImages();
+    
+    var slider = document.getElementById('interpolation-slider');
+    if (slider) {
+      preloadInterpolationImages();
 
-    // $('#interpolation-slider').on('input', function(event) {
-    //   setInterpolationImage(this.value);
-    // });
-    // setInterpolationImage(0);
-    // $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
+      slider.oninput = function(event) {
+        setInterpolationImage(this.value);
+      };
+      setInterpolationImage(0);
 
-    // bulmaSlider.attach();
+      slider.prop = NUM_INTERP_FRAMES - 1;
+    }
 
-})
+
+    bulmaSlider.attach();
+
+});
+
+
+function replaceImage(newimage,image)
+{
+	image.src               = newimage.src;
+	image.parentNode.href   = newimage.src;
+	image.style.borderColor = '#FFFFFF';
+}
