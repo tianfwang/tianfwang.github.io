@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			infinite: true,
 			autoplay: true,
 			pauseOnHover: true,
-			autoplaySpeed: 2000,
+			autoplaySpeed: 2500,
     }
 
 		// Initialize all div with carousel class
