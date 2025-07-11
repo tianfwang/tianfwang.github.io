@@ -60,7 +60,76 @@
           <p></p>
           <SPAN STYLE="font-size:4mm;font-weight:normal">  * denotes equal contribution</SPAN>         
           <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
-            
+              
+            <!-- SLURPP -->
+            <tr onmouseout="SLURPP_stop()" onmouseover="SLURPP_start()">
+              <td style="padding:20px;width:25%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id='SLURPP_image_4'>
+                    <img src='images/SLURPP/SLURPP_image_1.png' width="160"></div>
+                  <div class="two" id='SLURPP_image_1'>
+                    <img src='images/SLURPP/SLURPP_image_1.png' width="160"></div>
+                  <div class="two" id='SLURPP_image_2'>
+                    <img src='images/SLURPP/SLURPP_image_2.png' width="160"></div>
+                  <div class="two" id='SLURPP_image_3'>
+                    <img src='images/SLURPP/SLURPP_image_3.png' width="160"></div>
+                  <div class="two" id='SLURPP_before'>
+                    <img src='images/SLURPP/SLURPP_before.png' width="160"></div>
+                  
+                </div>
+                <script type="text/javascript">
+                  function SLURPP_clear_all() {
+                    for (let i = 1; i < 5; i ++){
+                      SLURPP_img_id = 'SLURPP_image_' + i.toString()
+                      document.getElementById(SLURPP_img_id).style.opacity = "0";
+                    }
+                  }
+                  function SLURPP_start() {
+
+                    if (document.getElementById('SLURPP_before').style.opacity == "1"){
+                      document.getElementById('SLURPP_before').style.opacity = "0";
+                      SLURPP_clear_all()
+                      SLURPP_rand_idx = Math.floor(Math.random() * 4) + 1
+                      SLURPP_rand_idx = SLURPP_rand_idx.toString()
+                      SLURPP_show_id = 'SLURPP_image_' + SLURPP_rand_idx
+                      document.getElementById(SLURPP_show_id).style.opacity = "1";
+                    }
+                  }
+          
+                  function SLURPP_stop() {
+                    SLURPP_clear_all()
+                    document.getElementById('SLURPP_before').style.opacity = "1"
+                  }
+                  SLURPP_stop()
+                </script>
+              </td>
+              <td style="padding:20px;width:75%;vertical-align:middle">
+                <a href="https://tianfwang.github.io/slurpp/" target="_blank" rel="noopener noreferrer">
+                  <span class="papertitle">Single-Step Latent Diffusion for Underwater Image Restoration
+                  </span>
+                </a>
+                <br>
+                <a href="https://jiayi-wu-leo.github.io/">Jiayi Wu*</a>,
+                <strong>Tianfu Wang*,</strong>
+                <a href="https://www.linkedin.com/in/bbkrsddque/" target="_blank" rel="noopener noreferrer">Md Abu Bakr Siddique</a>,
+                <a href="https://jahid.ece.ufl.edu/">Md Jahidul Islam</a>,
+                <a href="http://users.umiacs.umd.edu/~fer/"  target="_blank" rel="noopener noreferrer">Cornelia  Fermüller</a>,
+                <a href="https://robotics.umd.edu/clark/faculty/350/Yiannis-Aloimonos"  target="_blank" rel="noopener noreferrer">Yiannis  Aloimonos</a>,
+                <a href="http://www.cs.umd.edu/~metzler/"  target="_blank" rel="noopener noreferrer">Christopher A. Metzler</a>
+                <br>
+                <em>IEEE TPAMI & ICCP</em>, 2025
+                <br>
+                <a href="https://tianfwang.github.io/slurpp/" target="_blank" rel="noopener noreferrer">Project Page</a>
+                /
+                <a href="https://www.arxiv.org/abs/2507.07878" target="_blank" rel="noopener noreferrer">Paper</a>
+                <!-- /
+                <a href="https://github.com/kongdai123/repainting_3d_assets" target="_blank" rel="noopener noreferrer">Code</a> -->
+                <p></p>
+                <p> Single-step latent diffusion for jointly predicting clear restore underwater image and water medium backscattering and transmission.
+                 </p> 
+                </td>
+            </tr>
+
             <!-- Marigold -->
             <tr>
               <td style="padding:20px;width:25%;vertical-align:middle">
@@ -85,7 +154,7 @@
                 <a href="https://www.obukhov.ai"  target="_blank" rel="noopener noreferrer">Anton Obukhov*</a>,
                 <a href="https://scholar.google.com/citations?user=FZuNgqIAAAAJ&hl=en"  target="_blank" rel="noopener noreferrer">Konrad Schindler</a>
                 <br>
-                <em>Arxiv preprint, in review</em>, 2025
+                <em>IEEE TPAMI</em>, 2025
                 <br>
                 <a href="https://www.obukhov.ai/marigold" target="_blank" rel="noopener noreferrer">Project Page</a> /
                 <a href="https://arxiv.org/abs/2505.09358" target="_blank" rel="noopener noreferrer">Paper</a> /
