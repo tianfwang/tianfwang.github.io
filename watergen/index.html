@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="WaterGen: Decoupling Scene and Medium in Underwater Image Generation">
+  <meta name="keywords" content="WaterGen, Underwater Image Generation, Latent Diffusion, Synthetic Data">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://tianfwang.github.io/watergen/static/images/watergen_coral.svg">
+  <meta name="twitter:image" content="https://tianfwang.github.io/watergen/static/images/watergen_coral.svg">
+  <title>WaterGen: Decoupling Scene and Medium in Underwater Image Generation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/watergen_coral.svg" type="image/svg+xml">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <style>
+    .watergen-figure {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .watergen-figure.narrow {
+      max-width: 900px;
+    }
+
+    .watergen-figure.medium {
+      max-width: 1100px;
+    }
+
+    .watergen-caption {
+      max-width: 980px;
+      margin: 0.75rem auto 0;
+      color: #4a4a4a;
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .watergen-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .watergen-table th,
+    .watergen-table td {
+      border-bottom: 1px solid #e6e6e6;
+      padding: 0.65rem 0.75rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .watergen-table th:first-child,
+    .watergen-table td:first-child {
+      text-align: left;
+    }
+
+    .watergen-table th {
+      color: #363636;
+      font-weight: 700;
+    }
+
+    .metric-band {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    .highlight {
+      color: #1774b8;
+      font-weight: 700;
+    }
+
+    .bibtex {
+      background: #f5f5f5;
+      border-radius: 6px;
+      color: #333;
+      font-size: 0.86rem;
+      padding: 1rem;
+      overflow-x: auto;
+      text-align: left;
+      white-space: pre;
+    }
+
+    @media screen and (max-width: 768px) {
+      .publication-title {
+        font-size: 2rem !important;
+      }
+
+      .watergen-caption {
+        font-size: 0.94rem;
+      }
+
+      .watergen-table {
+        min-width: 680px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">WaterGen: Decoupling Scene and Medium in Underwater Image Generation</h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://jiayi-wu-leo.github.io/">Jiayi Wu</a><sup>1,*</sup>,</span>
+            <span class="author-block"><a href="https://tianfwang.github.io/">Tianfu Wang</a><sup>1,*</sup>,</span>
+            <span class="author-block">Tianyi Xiong<sup>1</sup>,</span>
+            <span class="author-block">Dehao Yuan<sup>1</sup>,</span>
+            <span class="author-block">Xiaomin Lin<sup>2</sup>,</span>
+            <span class="author-block"><a href="https://jahid.ece.ufl.edu/">Md Jahidul Islam</a><sup>3</sup>,</span>
+            <span class="author-block"><a href="https://users.umiacs.umd.edu/~fer/">Cornelia Fermuller</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://www.cs.umd.edu/people/metzler">Christopher Metzler</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://robotics.umd.edu/clark/faculty/350/Yiannis-Aloimonos">Yiannis Aloimonos</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Maryland</span>
+            <span class="author-block"><sup>2</sup>University of South Florida</span>
+            <span class="author-block"><sup>3</sup>University of Florida</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">* Equal contribution</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">ECCV 2026</span>
+          </div>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="./static/WaterGen_Paper.pdf" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2606.31147" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/jiayi-wu-umd/WaterGen" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="content has-text-centered watergen-caption">
+        <b>WaterGen</b> synthesizes diverse underwater scenes while independently controlling physical water-medium effects such as attenuation, scattering, and background light.
+      </div>
+      <img src="./static/images/teaser2.png" class="watergen-figure medium" alt="WaterGen teaser showing controlled underwater image generation">
+      <div class="content has-text-centered watergen-caption">
+        <b>
+        <small>Top-right images are real; top-left images are generated by WaterGen.</small>
+        </b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            Underwater vision systems need large, varied, and accurately labeled data, but real underwater collection is expensive and hard to annotate. WaterGen addresses this by treating underwater generation as two separate controls: the scene content and the surrounding water medium.
+          </p>
+          <p>
+            The model first generates clean underwater scene latents using a LoRA-adapted latent diffusion backbone. A medium-conditioned decoder then applies physically meaningful attenuation and backscattering according to specified water parameters. This decoupling lets a single generated scene be rendered under many water conditions without changing the underlying geometry.
+          </p>
+          <p>
+            The resulting paired clean/degraded images become scalable synthetic training data for underwater restoration and semantic segmentation, improving downstream performance across multiple models and datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <h2 class="title is-3">Scene-Medium Decoupling</h2>
+        <img src="./static/images/rebuttal_comparison_v2.png" class="watergen-figure" alt="Comparison of SDXL, non-decoupled generation, and WaterGen medium control">
+        <div class="content has-text-justified watergen-caption">
+          WaterGen preserves scene structure while changing medium appearance. In contrast, base and non-decoupled diffusion baselines often entangle object layout with water color and turbidity.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <h2 class="title is-3">Controlled Underwater Generation</h2>
+        <img src="./static/images/Frame_5.png" class="watergen-figure" alt="Qualitative comparison across underwater generation methods and water types">
+        <div class="content has-text-justified watergen-caption">
+          Given common water types from the UF7D setting, WaterGen produces realistic underwater degradations while maintaining text-image alignment and scene fidelity.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <h2 class="title is-3">Proposed Method</h2>
+        <div class="content has-text-justified watergen-caption">
+          <b>Key idea.</b> WaterGen separates underwater generation into two complementary parts: a diffusion model handles diverse scene generation, while a physically grounded decoder handles accurate local water-medium effects. This keeps object layout, scene geometry, and prompt alignment in the generative latent space, and moves attenuation, scattering, and background-light control to the stage where pixel-level radiometric accuracy matters most.
+        </div>
+        <br>
+        <img src="./static/images/pipeline.png" class="watergen-figure medium" alt="WaterGen inference pipeline">
+        <div class="content has-text-justified watergen-caption">
+          At inference time, WaterGen generates a clean semantic latent from a text prompt, then decodes it with explicit water-medium parameters. The same latent can be decoded repeatedly under different physical water conditions.
+        </div>
+        <br>
+        <img src="./static/images/training.png" class="watergen-figure medium" alt="WaterGen two-stage training pipeline">
+        <div class="content has-text-justified watergen-caption">
+          Training is isolated into two stages: clean-target diffusion fine-tuning for underwater scene semantics, followed by medium-conditioned decoder training with physically synthesized degradation.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <h2 class="title is-3">Fine-Grained Medium Control</h2>
+        <img src="./static/images/media_control.png" class="watergen-figure narrow" alt="WaterGen medium control grid">
+        <div class="content has-text-justified watergen-caption">
+          Holding the generated scene fixed, WaterGen smoothly varies underwater appearance by changing physical medium parameters. This makes it possible to generate aligned clean/degraded pairs for learning under challenging water conditions.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Quantitative Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            On clear underwater scene generation, WaterGen improves visual quality and text-image alignment while adding explicit text + medium controllability.
+          </p>
+        </div>
+        <div class="metric-band">
+          <table class="watergen-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>UIQM ↑</th>
+                <th>MUSIQ ↑</th>
+                <th>CLIP Score ↑</th>
+                <th>Controllability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Atlantis</td>
+                <td>2.8338 ± 0.1927</td>
+                <td>67.5437 ± 1.7373</td>
+                <td>0.2457 ± 0.0274</td>
+                <td>Text-only</td>
+              </tr>
+              <tr>
+                <td>TIDE</td>
+                <td>2.3725 ± 0.3816</td>
+                <td>66.4304 ± 2.1780</td>
+                <td>0.2305 ± 0.0118</td>
+                <td>Text-only</td>
+              </tr>
+              <tr>
+                <td><b>WaterGen</b></td>
+                <td class="highlight">3.0239 ± 0.1317</td>
+                <td class="highlight">69.2638 ± 0.8813</td>
+                <td class="highlight">0.2614 ± 0.0073</td>
+                <td><b>Text + Medium</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <h2 class="title is-3">Downstream Applications</h2>
+        <img src="./static/images/restore.png" class="watergen-figure" alt="Restoration results with WaterGen data augmentation">
+        <div class="content has-text-justified watergen-caption">
+          Synthetic pairs from WaterGen improve underwater restoration training by exposing models to broader attenuation and backscattering conditions.
+        </div>
+        <br>
+        <img src="./static/images/segmentation.png" class="watergen-figure" alt="Large segmentation comparison with WaterGen data augmentation">
+        <div class="content has-text-justified watergen-caption">
+          For underwater segmentation, WaterGen provides degraded images paired with reliable clean-image pseudo-labels, improving mask completeness under strong degradation.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <h2 class="title is-3">Generation Diversity</h2>
+        <img src="./static/images/diversity.png" class="watergen-figure narrow" alt="Diverse zero-shot WaterGen underwater environments">
+        <div class="content has-text-justified watergen-caption">
+          WaterGen also generalizes to diverse and unusual text prompts, producing high-fidelity underwater scenes while keeping medium effects controllable.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">BibTeX</h2>
+        <pre class="bibtex">@inproceedings{wu2026watergen,
+  title={WaterGen: Decoupling Scene and Medium in Underwater Image Generation},
+  author={Wu, Jiayi and Wang, Tianfu and Xiong, Tianyi and Yuan, Dehao and Lin, Xiaomin and Islam, Md Jahidul and Fermuller, Cornelia and Metzler, Christopher and Aloimonos, Yiannis},
+  booktitle={European Conference on Computer Vision (ECCV)},
+  year={2026}
+}</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website uses elements from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, <a href="https://osmosis-diffusion.github.io/">Osmosis</a>, and the <a href="https://tianfwang.github.io/slurpp/">SLURPP</a> project page template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
